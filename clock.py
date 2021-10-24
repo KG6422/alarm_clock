@@ -39,10 +39,10 @@ def get_time(time=True):
         return #not implemented
 
 def alarm_screen():
-    ans="I solemly swear to not get back in bed !%]$"
+    ans="I solemly swear to not get back in bed!"
     lay2 = [
         [sg.Text("Retype the following sentence to silence the alarm (1/2):", font="Any 40 bold")],
-        [sg.Text("I solemly swear to not get back in bed !%]$", font="Any 30 italic")],
+        [sg.Text(ans, font="Any 30 italic")],
         [sg.Text("Response", font="Any 20"), sg.InputText()],
         [sg.Button("Submit", key='-subm-')]
     ]
@@ -54,10 +54,10 @@ def alarm_screen():
             #escape!
             break
     win2.close()
-    # win_math = math_puzzle() # consider moving this statement towards the main while loop
+    
 
 def math_puzzle():
-    puzzle = mp.create_puzzle() # returns (ans, string)
+    puzzle = mp.puzzle() # returns (ans, string)
     lay_math = [
         [sg.Text("Answer the following math question to silence the alarm (2/2):", font="Any 40 bold")],
         [sg.Text(puzzle[1] + " = ?", font="Any 30 italic")],
@@ -130,6 +130,7 @@ while True:
         elif alarm_set:
             if is_alarm_conditions():
                 win2 = alarm_screen()
+                win_math = math_puzzle()
             else:
                 sg.Popup("Cancelling Alarm!", keep_on_top=True)
             window["-alarm-"].Update("Set Alarm")
